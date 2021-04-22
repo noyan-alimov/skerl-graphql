@@ -24,6 +24,21 @@ export class TeacherResolver {
 		return teacher;
 	}
 
+	@Query(() => Teacher)
+	async teacherByName(
+		@Arg('name', () => String)
+		name: string
+	): Promise<Teacher> {
+		const teacher = await Teacher.findOne({ name });
+		if (!teacher) {
+			throw new Error('Teacher not found');
+		}
+
+		const quizzes = await Quiz.find({ teacher });
+		teacher.quizzes = quizzes;
+		return teacher;
+	}
+
 	@Mutation(() => Teacher)
 	async createTeacher(
 		@Arg('name', () => String)

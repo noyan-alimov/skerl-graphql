@@ -36,7 +36,7 @@ const main = async (): Promise<void> => {
 
 	apolloServer.applyMiddleware({
 		app,
-		cors: { origin: 'http://localhost:3000', credentials: true },
+		cors: { origin: 'http://localhost:8100', credentials: true },
 	});
 
 	app.listen(8000, () => {
