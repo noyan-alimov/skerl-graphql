@@ -1,5 +1,7 @@
 import { Quiz } from '../entities/Quiz';
 import { Question } from '../entities/Question';
+import { Teacher } from '../entities/Teacher';
+
 import {
 	Arg,
 	Field,
@@ -13,7 +15,7 @@ import {
 @InputType()
 class QuizInput {
 	@Field()
-	creatorId: string;
+	teacherId: number;
 
 	@Field()
 	name: string;
@@ -46,7 +48,8 @@ export class QuizResolver {
 		@Arg('input', () => QuizInput)
 		input: QuizInput
 	): Promise<Quiz> {
-		return Quiz.create({ ...input }).save();
+		const teacher = await Teacher.findOne(input.teacherId);
+		return Quiz.create({ teacher, name: input.name }).save();
 	}
 
 	@Mutation(() => Quiz)

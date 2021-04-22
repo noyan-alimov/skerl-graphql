@@ -3,10 +3,12 @@ import {
 	BaseEntity,
 	Column,
 	Entity,
+	ManyToOne,
 	OneToMany,
 	PrimaryGeneratedColumn,
 } from 'typeorm';
 import { Question } from './Question';
+import { Teacher } from './Teacher';
 
 @ObjectType()
 @Entity()
@@ -16,12 +18,11 @@ export class Quiz extends BaseEntity {
 	id!: number;
 
 	@Field()
-	@Column({ unique: true })
-	creatorId!: string;
-
-	@Field()
 	@Column()
 	name!: string;
+
+	@ManyToOne(() => Teacher, teacher => teacher.quizzes)
+	teacher: Teacher;
 
 	@Field(() => [Question])
 	@OneToMany(() => Question, question => question.quiz)

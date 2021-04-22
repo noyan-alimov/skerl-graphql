@@ -3,7 +3,9 @@ import path from 'path';
 import express from 'express';
 import { ApolloServer } from 'apollo-server-express';
 import { buildSchema } from 'type-graphql';
+import { TeacherResolver } from './resolvers/teacher';
 import { QuizResolver } from './resolvers/Quiz';
+import { Teacher } from './entities/Teacher';
 import { Quiz } from './entities/Quiz';
 import { Question } from './entities/Question';
 import { Answer } from './entities/Answer';
@@ -16,7 +18,7 @@ const main = async (): Promise<void> => {
 		password: 'password',
 		synchronize: true,
 		logging: true,
-		entities: [Quiz, Question, Answer],
+		entities: [Teacher, Quiz, Question, Answer],
 		migrations: [path.join(__dirname, './migrations/*')],
 		cli: {
 			migrationsDir: 'migrations',
@@ -27,7 +29,7 @@ const main = async (): Promise<void> => {
 
 	const apolloServer = new ApolloServer({
 		schema: await buildSchema({
-			resolvers: [QuizResolver],
+			resolvers: [TeacherResolver, QuizResolver],
 			validate: false,
 		}),
 	});
