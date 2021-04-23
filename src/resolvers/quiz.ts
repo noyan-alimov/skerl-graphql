@@ -49,6 +49,10 @@ export class QuizResolver {
 		input: QuizInput
 	): Promise<Quiz> {
 		const teacher = await Teacher.findOne(input.teacherId);
+		if (!teacher) {
+			throw new Error('Teacher not found');
+		}
+
 		return Quiz.create({ teacher, name: input.name }).save();
 	}
 

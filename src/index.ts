@@ -5,6 +5,8 @@ import { ApolloServer } from 'apollo-server-express';
 import { buildSchema } from 'type-graphql';
 import { TeacherResolver } from './resolvers/teacher';
 import { QuizResolver } from './resolvers/Quiz';
+import { QuestionResolver } from './resolvers/question';
+import { AnswerResolver } from './resolvers/answer';
 import { Teacher } from './entities/Teacher';
 import { Quiz } from './entities/Quiz';
 import { Question } from './entities/Question';
@@ -29,7 +31,12 @@ const main = async (): Promise<void> => {
 
 	const apolloServer = new ApolloServer({
 		schema: await buildSchema({
-			resolvers: [TeacherResolver, QuizResolver],
+			resolvers: [
+				TeacherResolver,
+				QuizResolver,
+				QuestionResolver,
+				AnswerResolver,
+			],
 			validate: false,
 		}),
 	});
