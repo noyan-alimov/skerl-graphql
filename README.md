@@ -1,6 +1,6 @@
 # skerl
 
-Quiz App that lets users create quizzes so that other users would complete them. Quizzes are made out of MCQs (Multiple Choice Questions).
+Quiz App that lets teachers create quizzes so that students would complete them. Quizzes are made out of MCQs (Multiple Choice Questions).
 
 ### GraphQL API for the quiz app built with:
 
