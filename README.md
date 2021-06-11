@@ -11,3 +11,4 @@ Quiz App that lets teachers create quizzes so that students would complete them.
 - Type-GraphQL
 - TypeORM
 - PostgreSQL
+- git test, local
